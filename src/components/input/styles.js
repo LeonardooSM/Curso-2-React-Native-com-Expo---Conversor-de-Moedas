@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
             fontSize: 14
         },
         input:{
-            backgroundColor: colors.inputBackgroundbackground,
+            backgroundColor: colors.inputBackground,
             color:colors.text,
             fontSize: 24,
             fontWeight: 'bold',

@@ -3,7 +3,7 @@ import { colors } from "./src/styles/colors"
 
 
 export const styles = StyleSheet.create({
-    contanier: {
+    container: {
         flex: 1,
         backgroundColor: colors.background
     },
@@ -46,6 +46,30 @@ export const styles = StyleSheet.create({
         marginBottom: 12,
         alignItems: 'center',
         justifyContent: 'center'
+    },
+
+    swapButton: {
+        backgroundColor: colors.primary,
+        paddingVertical: 16,
+        paddingHorizontal: 24,
+        borderRadius: 12,
+        marginBottom: 24
+    },
+    swapButtonText: {
+        color:'#ffffff',
+        textAlign: 'center',
+        fontSize: 18,
+        fontWeight: '600'
+    },
+    convertpButton: {
+        backgroundColor: colors.primary,
+        paddingVertical: 16,
+        paddingHorizontal: 24,
+        borderRadius: 12,
+        marginBottom: 24
+    },
+    convertpButtonDisabled:{
+        backgroundColor: colors.disabled,
     }
 
 })

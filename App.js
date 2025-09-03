@@ -4,12 +4,14 @@ import { Button } from './src/components/Button';
 import { styles } from './App.styles'
 import { currencies } from './src/constants/currencies'
 import { Input } from './src/components/input';
+import { ResultCard } from './src/components/ResultCard';
+import {exchangeRateApi} from './src/services/api'
 
 
 export default function App() {
   return (
     <KeyboardAvoidingView
-      style={styles.contanier}
+      style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
 
     >
@@ -25,7 +27,7 @@ export default function App() {
             </Text>
           </View>
           <View style={styles.card}>
-            <Text styles={styles.label}>De:</Text>
+            <Text style={styles.label}>De:</Text>
 
             <View style={styles.currencyGrid}>
               {currencies.map(currency => (
@@ -37,10 +39,32 @@ export default function App() {
               ))}
 
             </View>
-              <Input/>
-            
-          </View>
+            <Input label="Valor:" />
 
+            <TouchableOpacity style={styles.swapButton}>
+              <Text style={styles.swapButtonText}>
+                ↑↓
+              </Text>
+            </TouchableOpacity>
+            <Text style={styles.label}>Para: </Text>
+            <View style={styles.currencyGrid}>
+              {currencies.map(currency => (
+                <Button variant='primsary'
+                  key={currency.code}
+                  currency={currency}
+                >
+                </Button>
+              ))}
+
+            </View>
+          </View>
+          <TouchableOpacity style={styles.convertpButton}>
+            <Text style={styles.swapButtonText}>
+              Converter
+            </Text>
+          </TouchableOpacity>
+
+          <ResultCard/>
 
         </View>
       </ScrollView>
