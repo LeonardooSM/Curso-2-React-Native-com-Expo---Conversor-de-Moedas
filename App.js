@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { KeyboardAvoidingView, Platform, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, KeyboardAvoidingView, Platform, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { Button } from './src/components/Button';
 import { styles } from './App.styles';
 import { currencies } from './src/constants/currencies';
@@ -18,11 +18,21 @@ export default function App() {
   const [exchangeRate, setExchangeRate] = useState(null);
 
   async function fetchExchangeRate() {
+    try {
+      setLoading(true)
+    if (!amount) return
+
+
     const data = await exchangeRateApi(fromCurrency);
     const rate = data.rates[toCurrency]
+    setExchangeRate(rate)
     const convertedAmount = convertCurrency(amount, rate)
-    console.log(convertedAmount)
     setResult(convertedAmount)
+    } catch(err){
+      alert("Erro, tente novamente!")
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -84,13 +94,30 @@ export default function App() {
           </View>
 
           <TouchableOpacity
-            style={styles.convertpButton}
+            style={[styles.convertpButton, (!amount
+              || loading) && styles.convertpButtonDisabled]}
             onPress={fetchExchangeRate}
+            disabled={!amount || loading}
           >
-            <Text style={styles.swapButtonText}>Converter</Text>
+            {loading ? (
+              <ActivityIndicator color="white" />
+            ) : (
+
+
+              <Text style={styles.swapButtonText}>
+                Converter
+              </Text>
+            )}
           </TouchableOpacity>
 
-          <ResultCard />
+          <ResultCard
+            exchangeRate={exchangeRate}
+            result={result}
+            fromCurrency={fromCurrency}
+            toCurrency={toCurrency}
+            currencies={currencies}
+
+          />
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
