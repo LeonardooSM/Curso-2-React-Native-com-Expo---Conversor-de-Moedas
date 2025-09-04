@@ -35,6 +35,13 @@ export default function App() {
     }
   }
 
+function swapCurrency(){
+  setFromCurrency(toCurrency)
+  setToCurrency(fromCurrency)
+  setResult('')
+}
+
+
   return (
     <KeyboardAvoidingView
       style={[styles.container, { backgroundColor: '#0f172a' }]}
@@ -74,8 +81,10 @@ export default function App() {
 
             <Input label="Valor:" value={amount} onChangeText={setAmount} />
 
-            <TouchableOpacity style={styles.swapButton}>
-              <Text style={styles.swapButtonText}>↑↓</Text>
+            <TouchableOpacity style={styles.swapButton} onPress={swapCurrency}>
+              <Text style={styles.swapButtonText}>
+                ↑↓
+              </Text>
             </TouchableOpacity>
 
             <Text style={styles.label}>Para: </Text>
